@@ -16,10 +16,14 @@
 package com.lidroid.xutils.http.callback;
 
 import android.text.TextUtils;
+
 import com.lidroid.xutils.util.IOUtils;
+import com.lidroid.xutils.util.OtherUtils;
+
 import org.apache.http.HttpEntity;
 
 import java.io.*;
+import java.net.URLDecoder;
 
 public class FileDownloadHandler {
 
@@ -83,7 +87,7 @@ public class FileDownloadHandler {
         if (targetFile.exists() && !TextUtils.isEmpty(responseFileName)) {
             File newFile = new File(targetFile.getParent(), responseFileName);
             while (newFile.exists()) {
-                newFile = new File(targetFile.getParent(), System.currentTimeMillis() + responseFileName);
+                newFile = new File(targetFile.getParent(), OtherUtils.renameIncrementFilename(responseFileName));
             }
             return targetFile.renameTo(newFile) ? newFile : targetFile;
         } else {
