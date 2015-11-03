@@ -71,6 +71,7 @@ public class HttpUtils {
     }
 
     public HttpUtils(int connTimeout, String userAgent) {
+        configHttpCacheSize(0);//Default we don't need the cache for http,since it cause some unpredictable mistakes.
         HttpParams params = new BasicHttpParams();
 
         ConnManagerParams.setTimeout(params, connTimeout);

@@ -16,6 +16,7 @@
 package com.lidroid.xutils.http;
 
 import android.text.TextUtils;
+
 import com.lidroid.xutils.http.client.entity.BodyParamsEntity;
 import com.lidroid.xutils.http.client.multipart.HttpMultipartMode;
 import com.lidroid.xutils.http.client.multipart.MultipartEntity;
@@ -25,6 +26,7 @@ import com.lidroid.xutils.http.client.multipart.content.InputStreamBody;
 import com.lidroid.xutils.http.client.multipart.content.StringBody;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.task.Priority;
+
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
@@ -159,6 +161,22 @@ public class RequestParams {
         }
     }
 
+    public void addQueryStringParameter(String name, double value) {
+        addQueryStringParameter(name, String.valueOf(value));
+    }
+
+    public void addQueryStringParameter(String name, float value) {
+        addQueryStringParameter(name, String.valueOf(value));
+    }
+
+    public void addQueryStringParameter(String name, short value) {
+        addQueryStringParameter(name, String.valueOf(value));
+    }
+
+    public void addQueryStringParameter(String name, int value) {
+        addQueryStringParameter(name, String.valueOf(value));
+    }
+
     public void addQueryStringParameter(String name, String value) {
         if (queryStringParams == null) {
             queryStringParams = new ArrayList<NameValuePair>();
@@ -182,6 +200,10 @@ public class RequestParams {
                 queryStringParams.add(pair);
             }
         }
+    }
+
+    public void addBodyParameter(String name, int value) {
+        addBodyParameter(name, String.valueOf(value));
     }
 
     public void addBodyParameter(String name, String value) {
@@ -338,5 +360,12 @@ public class RequestParams {
             this.overwrite = overwrite;
             this.header = new BasicHeader(name, value);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "RequestParams{" +
+                "bodyParams=" + bodyParams +
+                '}';
     }
 }
